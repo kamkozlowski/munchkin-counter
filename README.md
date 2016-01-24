@@ -1,2 +1,4 @@
 # munchkin-counter
 Helper app that can be used during Munchkin card game for level and bonus counting. Application was builded using Spring boot and backbone.
+
+![screen01](https://cloud.githubusercontent.com/assets/16852423/12539001/bf1c074e-c2e8-11e5-9bd9-ffd254490cd1.png)
