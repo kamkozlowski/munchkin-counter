@@ -1,0 +1,9 @@
+/.idea/
+/.gradle/
+/gradle/
+/build/
+gradlew.bat
+munchkin-counter.iml
+gradlew
+/src/main/resources/static/lib/
+/node_modules/

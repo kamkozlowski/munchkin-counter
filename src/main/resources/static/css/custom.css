@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Windlass';
+    font-style:  normal;
+    font-weight: 400;
+    src: url('../fonts/windlass.ttf')
+}
+
+.player-border {
+    border:solid 5px hsl(21, 67%, 15%);
+    display:inline-block;
+    margin:1em;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    padding:1em;
+    line-height:1.5em;
+    background:hsla(67, 95%, 95%, 1);
+}
+
+body{
+    background: #fecf99;
+    font-family: 'Windlass';
+}
+
+.custom-button {
+    background-color: hsl(21, 67%, 15%);
+    border-color: #fecf99;;
+    color: #fff;
+}
+
+.custom-button:hover, .custom-button:hover, .custom-button:active {
+    color: hsl(17, 65%, 35%);
+}

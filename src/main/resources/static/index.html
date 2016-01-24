@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Munkchin Counter - Player List</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='fonts/windlass.ttf' rel='stylesheet' type='text/css'>
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 70px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+    </style>
+    <link href="css/custom.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h1>Player List</h1>
+            <div id="players">
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- jQuery Version 1.11.1 -->
+<script src="lib/jquery/jquery.js"></script>
+<!-- Backbone dependencies -->
+<script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script src="lib/underscore/underscore.js"></script>
+<!-- Backbone -->
+<script src="lib/backbone/backbone.js"></script>
+<!-- <script src="lib/backbone/plugins/localStorage/backbone.localStorage.js"></script> -->
+<!-- Templates -->
+<script  type="text/template" class="playerViewTemplate">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-11 player-border">
+        <h2><%= name %></h2>
+        <p>
+        <div class="btn-group">
+            <button class="btn remove-player custom-button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <button class="btn edit-player custom-button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Sex: <%= sex %></b>
+        </p>
+        <p>
+            <b>Level: <%= level %></b>
+        <div class="btn-group">
+            <button class="btn add-level custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn remove-level custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Bonus: <%= bonus %></b>
+        <div class="btn-group">
+            <button class="btn add-bonus custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn remove-bonus custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Attack: <%= attack %></b>
+        </p>
+    </div>
+</script>
+<script type="text/template" class="playerEditTemplate">
+    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 player-border">
+        <h2>Player edit</h2>
+        <form>
+            <fieldset class="form-group">
+                <label for="formPlayerName">Name</label>
+                <input type="text" class="form-control" id="formPlayerName" placeholder="Example input" value="<%= name %>">
+                <label for="formPlayerSex">Sex</label>
+                <select class="form-control" id="formPlayerSex" >
+                    <option <% if(sex === "Male") print("selected='selected'") %> >Male</option >
+                    <option <% if(sex === "Female") print("selected='selected'") %> >Female</option>
+                </select>
+            </fieldset>
+        </form>
+        <p>
+            <b>Level: <%= level %></b>
+        <div class="btn-group">
+            <button class="btn add-level custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn remove-level custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Bonus: <%= bonus %></b>
+        <div class="btn-group">
+            <button class="btn add-bonus custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn remove-bonus custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Attack: <%= attack %></b>
+        </p>
+        <p>
+        <div class="btn-group">
+            <button class="btn custom-button save-player"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
+            <button class="btn custom-button cancel-player"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+            <button class="btn custom-button remove-player"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove</button>
+        </div>
+        </p>
+    </div>
+    </div>
+</script>
+<script type="text/template" class="playerListViewTemplate">
+    <div class="btn-group">
+    <button class="btn btn-sm add-player custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add player</button>
+    <button class="btn btn-sm remove-players custom-button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All</button>
+    </div>
+</script>
+<!-- Bootstrap Core JavaScript -->
+<script src="lib/bootstrap/js/bootstrap.js"></script>
+<!-- App -->
+<script src="js/models/Player.js" type="text/javascript"></script>
+<script src="js/models/Players.js" type="text/javascript"></script>
+<script src="js/views/PlayerView.js" type="text/javascript"></script>
+<script src="js/views/PlayerEditView.js" type="text/javascript"></script>
+<script src="js/views/PlayerViews.js" type="text/javascript"></script>
+<script src="js/routers/app.js" type="text/javascript"></script>
+
+<script>
+    $(function() {
+        MunchkinApp.start();
+    });
+</script>
+</body>
+</html>
