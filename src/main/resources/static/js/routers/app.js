@@ -1,28 +1,28 @@
 var MunchkinApp = new (Backbone.Router.extend({
-    routes: { "" : "index", "edit/:id": "editPlayer"},
-    initialize: function(){
+    routes: {
+        "player(/:id)": "player"
+    },
+    initialize: function () {
         console.log('initialize');
         this.playerList = new PlayerList();
         this.playerList.fetch();
 
-
     },
-    start: function(){
+    start: function () {
         console.log('start');
         Backbone.history.start();
     },
-    index: function(){
-        console.log('index');
-
-        this.playerListView = new PlayerListView({collection : this.playerList});
-        this.playerListView.render();
-        $('#players').html(this.playerListView.el);
-
+    player: function (id) {
+        console.log('player function');
+        if (id == null) {
+            this.playerListView = new PlayerListView({collection: this.playerList});
+            this.playerListView.render();
+            $('#players').html(this.playerListView.el);
+        }
+        else {
+            var playerEditView = new PlayerEditView({model: this.playerList.get(id)});
+            playerEditView.render();
+            $('#players').html(playerEditView.el);
+        }
     },
-    editPlayer: function(id){
-        console.log('edit player1');
-        var playerEditView = new PlayerEditView({model : this.playerList.get(id)});
-        playerEditView.render();
-        $('#players').html(playerEditView.el);
-    }
 }));

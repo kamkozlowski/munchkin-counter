@@ -49,6 +49,6 @@ var PlayerView = Backbone.View.extend({
     },
     editPlayer: function(){
         console.log('edit player');
-        MunchkinApp.navigate('edit/' + this.model.get('id'), {trigger: true});
+        MunchkinApp.navigate('player/' + this.model.get('id'), {trigger: true});
     }
 });
