@@ -1,5 +1,6 @@
 var MunchkinApp = new (Backbone.Router.extend({
     routes: {
+        "":"player",
         "player(/:id)": "player"
     },
     initialize: function () {
