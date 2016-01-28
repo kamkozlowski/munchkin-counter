@@ -10,7 +10,7 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String sex;
+    private boolean sex;
     private int level;
     private int bonus;
     private int attack;
@@ -31,11 +31,11 @@ public class Player {
         this.name = name;
     }
 
-    public String getSex() {
+    public boolean isSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(boolean sex) {
         this.sex = sex;
     }
 

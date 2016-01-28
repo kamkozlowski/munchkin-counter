@@ -54,8 +54,8 @@
 
     <div class="row">
         <div class="text-center">
-            <h1>Player List</h1>
-            <div id="players">
+            <div id="content">
+                <h1>Dashboard</h1>
             </div>
         </div>
     </div>
@@ -68,11 +68,12 @@
 <script src="lib/underscore/underscore.js"></script>
 <!-- Backbone -->
 <script src="lib/backbone/backbone.js"></script>
+<script src="lib/mustache/mustache.js"></script>
 <!-- <script src="lib/backbone/plugins/localStorage/backbone.localStorage.js"></script> -->
 <!-- Templates -->
 <script  type="text/template" class="playerViewTemplate">
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-11 player-border">
-        <h2><%= name %></h2>
+        <h2>{{name}}</h2>
         <p>
         <div class="btn-group">
             <button class="btn remove-player custom-button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
@@ -80,24 +81,24 @@
         </div>
         </p>
         <p>
-            <b>Sex: <%= sex %></b>
+            <b>Sex: {{#sex}}Male{{/sex}}{{^sex}}Female{{/sex}}</b>
         </p>
         <p>
-            <b>Level: <%= level %></b>
+            <b>Level: {{level}}</b>
         <div class="btn-group">
             <button class="btn add-level custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             <button class="btn remove-level custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
         </div>
         </p>
         <p>
-            <b>Bonus: <%= bonus %></b>
+            <b>Bonus: {{bonus}}</b>
         <div class="btn-group">
             <button class="btn add-bonus custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             <button class="btn remove-bonus custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
         </div>
         </p>
         <p>
-            <b>Attack: <%= attack %></b>
+            <b>Attack: {{attack}}</b>
         </p>
     </div>
 </script>
@@ -107,30 +108,30 @@
         <form>
             <fieldset class="form-group">
                 <label for="formPlayerName">Name</label>
-                <input type="text" class="form-control" id="formPlayerName" placeholder="Example input" value="<%= name %>">
+                <input type="text" class="form-control" id="formPlayerName" placeholder="Example input" value="{{name}}">
                 <label for="formPlayerSex">Sex</label>
                 <select class="form-control" id="formPlayerSex" >
-                    <option <% if(sex === "Male") print("selected='selected'") %> >Male</option >
-                    <option <% if(sex === "Female") print("selected='selected'") %> >Female</option>
+                    <option  {{#sex}}selected='selected'{{/sex}} >Male</option >
+                    <option  {{^sex}}selected='selected'{{/sex}} >Female</option>
                 </select>
             </fieldset>
         </form>
         <p>
-            <b>Level: <%= level %></b>
+            <b>Level: {{level}}</b>
         <div class="btn-group">
             <button class="btn add-level custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             <button class="btn remove-level custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
         </div>
         </p>
         <p>
-            <b>Bonus: <%= bonus %></b>
+            <b>Bonus: {{bonus}}</b>
         <div class="btn-group">
             <button class="btn add-bonus custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             <button class="btn remove-bonus custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
         </div>
         </p>
         <p>
-            <b>Attack: <%= attack %></b>
+            <b>Attack: {{attack}}</b>
         </p>
         <p>
         <div class="btn-group">

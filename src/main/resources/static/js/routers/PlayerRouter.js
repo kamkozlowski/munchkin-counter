@@ -19,16 +19,16 @@ var PlayerRouter = new (Backbone.Router.extend({
         if (id == null) {
             this.playerListView = new PlayerListView({collection: this.playerList});
             this.playerListView.render();
-            $('#players').html(this.playerListView.el);
+            $('#content').html(this.playerListView.el);
         }
         else {
             var playerEditView = new PlayerEditView({model: this.playerList.get(id)});
             playerEditView.render();
-            $('#players').html(playerEditView.el);
+            $('#content').html(playerEditView.el);
         }
     },
     playerGrid : function(){
         console.log("player gird");
-        $('#players').html('');
+        $('#content').html('<h1>Table View</h1>');
     }
 }));

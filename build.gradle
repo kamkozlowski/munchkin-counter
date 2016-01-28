@@ -58,6 +58,10 @@ bower {
 		source 'backbone.localStorage.js' >> '/backbone/plugins/localStorage/'
 	}
 
+	'mustache.js'('2.2.1'){
+		source 'mustache.js' >> '/mustache/'
+	}
+
 	'jquery'('2.2.0') {
 		source 'dist/jquery.js' >> '/jquery/'
 	}

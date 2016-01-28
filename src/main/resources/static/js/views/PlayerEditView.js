@@ -8,7 +8,7 @@ var PlayerEditView = Backbone.View.extend({
         "click .add-bonus" : "addBonus",
         "click .remove-bonus" : "removeBonus",
     },
-    template: _.template($( "script.playerEditTemplate" ).html()),
+    template: $( "script.playerEditTemplate" ).html(),
 
     initialize: function() {
         this.model.on('change', this.render, this);
@@ -17,7 +17,7 @@ var PlayerEditView = Backbone.View.extend({
     render: function(){
         console.log('rendering player view item');
         var attributes = this.model.toJSON();
-        this.$el.html(this.template(attributes));
+        this.$el.html(Mustache.to_html(this.template,attributes));
         console.log('end of rendering player view item');
         return this;
     },
@@ -27,7 +27,14 @@ var PlayerEditView = Backbone.View.extend({
         var playerName = $('#formPlayerName').val();
         this.model.set('name',playerName);
         var playerSex = $('#formPlayerSex').val();
-        this.model.set('sex',playerSex);
+        var sex;
+        if(playerSex=="Male"){
+            sex = true;
+        }
+        else{
+            sex = false;
+        }
+        this.model.set('sex',sex);
         this.model.save();
         console.log(this.model.toJSON());
         PlayerRouter.navigate('player', {trigger: true});

@@ -2,7 +2,7 @@ var Player = Backbone.Model.extend({
     defaults: {
         id: undefined,
         name: 'Player',
-        sex: 'Male',
+        sex: true,
         level: 1,
         bonus: 0,
         attack: 1
