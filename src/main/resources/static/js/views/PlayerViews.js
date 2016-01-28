@@ -1,6 +1,3 @@
-/**
- * Created by kozik on 17.01.16.
- */
 var PlayerListView = Backbone.View.extend({
     events: {
         'click .add-player' : 'addPlayer',

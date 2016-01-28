@@ -65,9 +65,14 @@ body{
 }
 
 .navbar-inverse .navbar-toggle:focus {
-    color: hsl(16, 47%, 23%);
+    background: #fed59e;
 }
 
 .navbar-inverse .navbar-toggle:hover {
-    color: hsl(40, 56%, 16%);
+    background: #fecf99;
+}
+
+/* Nav-bar */
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border: none;
 }

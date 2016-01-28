@@ -29,6 +29,8 @@ var PlayerRouter = new (Backbone.Router.extend({
     },
     playerGrid : function(){
         console.log("player gird");
-        $('#content').html('<h1>Table View</h1>');
+        var playerGridView = new PlayerGridView({collection: this.playerList});
+        playerGridView.render();
+        $('#content').html(playerGridView.el);
     }
 }));
