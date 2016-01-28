@@ -15,6 +15,30 @@
     background:hsla(67, 95%, 95%, 1);
 }
 
+.navbar-border {
+    border-bottom:solid 5px hsl(21, 67%, 15%);
+    display:inline-block;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    line-height:1.5em;
+    background:hsla(67, 95%, 95%, 1);
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: hsl(21, 67%, 15%);
+}
+
+nav>li>a:hover {
+    color: hsl(21, 67%, 15%);
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: hsl(21, 67%, 15%);
+}
+
+.navbar-inverse .navbar-brand {
+    color: hsl(21, 67%, 15%);
+}
+
 body{
     background: #fecf99;
     font-family: 'Windlass';

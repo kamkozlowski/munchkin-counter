@@ -30,7 +30,7 @@ var PlayerEditView = Backbone.View.extend({
         this.model.set('sex',playerSex);
         this.model.save();
         console.log(this.model.toJSON());
-        MunchkinApp.navigate('player', {trigger: true});
+        PlayerRouter.navigate('player', {trigger: true});
     },
     addLevel : function(e){
         this.model.increaseAttribute('level');
@@ -47,13 +47,13 @@ var PlayerEditView = Backbone.View.extend({
     cancel: function(){
         console.log('Cancel button');
         this.model.fetch();
-        MunchkinApp.navigate('player', {trigger: true});
+        PlayerRouter.navigate('player', {trigger: true});
     },
 
     remove: function(){
         console.log('Remove button');
         this.model.destroy();
-        MunchkinApp.navigate('player', {trigger: true});
+        PlayerRouter.navigate('player', {trigger: true});
     }
 
 

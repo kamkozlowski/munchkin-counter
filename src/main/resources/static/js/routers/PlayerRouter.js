@@ -1,7 +1,8 @@
-var MunchkinApp = new (Backbone.Router.extend({
+var PlayerRouter = new (Backbone.Router.extend({
     routes: {
         "":"player",
-        "player(/:id)": "player"
+        "player(/:id)": "player",
+        "playerTable": "playerGrid"
     },
     initialize: function () {
         console.log('initialize');
@@ -11,7 +12,7 @@ var MunchkinApp = new (Backbone.Router.extend({
     },
     start: function () {
         console.log('start');
-        Backbone.history.start();
+
     },
     player: function (id) {
         console.log('player function');
@@ -26,4 +27,8 @@ var MunchkinApp = new (Backbone.Router.extend({
             $('#players').html(playerEditView.el);
         }
     },
+    playerGrid : function(){
+        console.log("player gird");
+        $('#players').html('');
+    }
 }));
