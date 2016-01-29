@@ -7,8 +7,6 @@ var PlayerRouter = new (Backbone.Router.extend({
     initialize: function () {
         console.log('initialize');
         this.playerList = new PlayerList();
-        this.playerList.fetch();
-
     },
     start: function () {
         console.log('start');
@@ -16,6 +14,7 @@ var PlayerRouter = new (Backbone.Router.extend({
     },
     player: function (id) {
         console.log('player function');
+        this.playerList.fetch();
         if (id == null) {
             this.playerListView = new PlayerListView({collection: this.playerList});
             this.playerListView.render();
@@ -29,6 +28,7 @@ var PlayerRouter = new (Backbone.Router.extend({
     },
     playerGrid : function(){
         console.log("player gird");
+        this.playerList.fetch();
         var playerGridView = new PlayerGridView({collection: this.playerList});
         playerGridView.render();
         $('#content').html(playerGridView.el);
