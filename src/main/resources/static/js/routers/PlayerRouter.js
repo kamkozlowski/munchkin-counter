@@ -2,7 +2,7 @@ var PlayerRouter = new (Backbone.Router.extend({
     routes: {
         "":"player",
         "player(/:id)": "player",
-        "playerTable": "playerGrid"
+        "playerTable(/:page)(/:size)": "playerGrid"
     },
     initialize: function () {
         console.log('initialize');
@@ -26,11 +26,28 @@ var PlayerRouter = new (Backbone.Router.extend({
             $('#content').html(playerEditView.el);
         }
     },
-    playerGrid : function(){
-        console.log("player gird");
-        this.playerList.fetch();
-        var playerGridView = new PlayerGridView({collection: this.playerList});
-        playerGridView.render();
-        $('#content').html(playerGridView.el);
+    playerGrid : function(page,size){
+        if(page==null){
+            page=0;
+        }
+        if(size==null){
+            size=10;
+        }
+        console.log("routing to player gird");
+        console.log("page: " + page + " size: " + size);
+        var self = this;
+        this.playerList.fetch({
+            data: {page: page, size: size},
+            //reset: true,
+            success: function () {
+                console.log('aa');
+                var playerGridView = new PlayerGridView({collection: self.playerList});
+                playerGridView.render();
+                $('#content').html(playerGridView.el);
+            }
+        });
+
+
+
     }
 }));
