@@ -2,9 +2,6 @@ var PlayerGridView = Backbone.View.extend({
     template: $( "script.playerGridViewTemplate" ).html(),
 
     initialize: function(){
-        //this.collection.on('add', this.addOne, this);
-        //this.collection.on('reset', this.addAll, this);
-        //this.listenTo(this.collection, 'reset', this.addAll);
     },
 
     events:{
@@ -12,8 +9,9 @@ var PlayerGridView = Backbone.View.extend({
         "click .previous-page" : "previousPage",
         "click .next-page" : "nextPage"
     },
-
+    rowViews: [],
     render: function(){
+        this.rowViews = [];
         console.log('Rendering player grid view');
         //var attributes = this.collection.toJSON();
         console.log("Page size: " + this.collection.size);
@@ -50,6 +48,7 @@ var PlayerGridView = Backbone.View.extend({
         console.log('addOne');
         console.log(playerGridItem.attributes);
         var playerGridViewItem = new PlayerGridViewItem({model: playerGridItem, tagName: 'tr'});
+        this.rowViews.push(playerGridViewItem);
         console.log('player grid view item created');
         this.$el.find('tbody').append(playerGridViewItem.render().el);
         console.log('adding one finished');
@@ -75,6 +74,17 @@ var PlayerGridView = Backbone.View.extend({
         var pageNumber = this.collection.number;
         pageNumber++;
         PlayerRouter.navigate('playerTable/'+pageNumber+'/' + $('#formPageSize').val(), {trigger: true});
+    },
+
+    close: function(){
+        this.rowViews.forEach(function(entry) {
+            console.log("removing row view")
+            entry.remove();
+        });
+        console.log("rows removed");
+        this.rowViews = [];
+        this.remove();
+        console.log("removing finished");
     }
 
 });

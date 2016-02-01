@@ -2,7 +2,7 @@ var PlayerEditView = Backbone.View.extend({
     events: {
         "click .save-player" : "save",
         "click .cancel-player" : "cancel",
-        "click .remove-player" : "remove",
+        "click .remove-player" : "removePlayer",
         "click .add-level" : "addLevel",
         "click .remove-level" : "removeLevel",
         "click .add-bonus" : "addBonus",
@@ -11,7 +11,7 @@ var PlayerEditView = Backbone.View.extend({
     template: $( "script.playerEditTemplate" ).html(),
 
     initialize: function() {
-        this.model.on('change', this.render, this);
+        this.listenTo(this.model, 'change', this.render);
     },
 
     render: function(){
@@ -41,15 +41,19 @@ var PlayerEditView = Backbone.View.extend({
     },
     addLevel : function(e){
         this.model.increaseAttribute('level');
+        this.model.updateAttackValue();
     },
     removeLevel : function(e){
         this.model.decreaseAttribute('level');
+        this.model.updateAttackValue();
     },
     addBonus : function(e){
         this.model.increaseAttribute('bonus');
+        this.model.updateAttackValue();
     },
     removeBonus : function(e){
         this.model.decreaseAttribute('bonus');
+        this.model.updateAttackValue();
     },
     cancel: function(){
         console.log('Cancel button');
@@ -57,7 +61,7 @@ var PlayerEditView = Backbone.View.extend({
         PlayerRouter.navigate('player', {trigger: true});
     },
 
-    remove: function(){
+    removePlayer: function(){
         console.log('Remove button');
         this.model.destroy();
         PlayerRouter.navigate('player', {trigger: true});

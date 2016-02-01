@@ -11,8 +11,6 @@ var Player = Backbone.Model.extend({
     initialize: function(){
         console.log('player init');
 
-        this.on('change:level',this.updateAttackValue, this);
-        this.on('change:bonus',this.updateAttackValue, this);
     },
     increaseAttribute : function(attrName){
         var value = this.get(attrName);

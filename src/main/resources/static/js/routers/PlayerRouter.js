@@ -16,14 +16,14 @@ var PlayerRouter = new (Backbone.Router.extend({
         console.log('player function');
         this.playerList.fetch();
         if (id == null) {
-            this.playerListView = new PlayerListView({collection: this.playerList});
-            this.playerListView.render();
-            $('#content').html(this.playerListView.el);
+            this.loadView(new PlayerListView({collection: this.playerList}));
+            this.view.render();
+            $('#content').html(this.view.el);
         }
         else {
-            var playerEditView = new PlayerEditView({model: this.playerList.get(id)});
-            playerEditView.render();
-            $('#content').html(playerEditView.el);
+            this.loadView(new PlayerEditView({model: this.playerList.get(id)}));
+            this.view.render();
+            $('#content').html(this.view.el);
         }
     },
     playerGrid : function(page,size){
@@ -38,16 +38,16 @@ var PlayerRouter = new (Backbone.Router.extend({
         var self = this;
         this.playerList.fetch({
             data: {page: page, size: size},
-            //reset: true,
             success: function () {
-                console.log('aa');
-                var playerGridView = new PlayerGridView({collection: self.playerList});
-                playerGridView.render();
-                $('#content').html(playerGridView.el);
+                self.loadView(new PlayerGridView({collection: self.playerList}));
+                self.view.render();
+                $('#content').html(self.view.el);
             }
         });
-
-
-
+    },
+    loadView : function(view) {
+        this.view && (this.view.close ? this.view.close() : this.view.remove());
+        this.view = view;
     }
+
 }));

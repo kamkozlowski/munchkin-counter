@@ -4,9 +4,10 @@ var PlayerListView = Backbone.View.extend({
         'click .remove-players' : 'removePlayers'
     },
     initialize : function(){
-        this.collection.on('add', this.addOne, this);
-        this.collection.on('reset', this.addAll, this);
+        this.listenTo(this.collection,'add', this.addOne);
+        this.listenTo(this.collection,'reset', this.addAll);
     },
+    playerViews: [],
     render: function() {
         console.log('Render player list');
         this.$el.append("<h1>Dashboard</h1>");
@@ -15,11 +16,17 @@ var PlayerListView = Backbone.View.extend({
         this.addAll();
     },
     addAll: function(){
+        this.playerViews.forEach(function(entry) {
+            console.log("removing views")
+            entry.remove();
+        });
+        this.playerViews = [];
         this.collection.forEach(this.addOne, this);
     },
     addOne: function(item){
         console.log('Adding item');
         var playerView = new PlayerView({model: item});
+        this.playerViews.push(playerView);
         this.$el.append(playerView.render().el);
     },
     addPlayer: function(){
@@ -34,5 +41,20 @@ var PlayerListView = Backbone.View.extend({
         while (model = this.collection.first()) {
             model.destroy();
         }
+        this.playerViews.forEach(function(entry) {
+            console.log("removing views")
+            entry.remove();
+        });
+        this.playerViews = [];
+    },
+    close: function(){
+        this.playerViews.forEach(function(entry) {
+            console.log("removing views")
+            entry.remove();
+        });
+        this.playerViews = [];
+        this.remove();
     }
+
+
 });

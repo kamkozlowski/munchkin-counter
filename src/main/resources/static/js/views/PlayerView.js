@@ -4,12 +4,12 @@ var PlayerView = Backbone.View.extend({
         "click .remove-level": "removeLevel",
         "click .add-bonus": "addBonus",
         "click .remove-bonus": "removeBonus",
-        'click .remove-player': 'remove',
+        'click .remove-player': 'removePlayer',
         'click .edit-player': 'editPlayer'
     },
     initialize: function () {
-        this.model.on('change', this.render, this);
-        this.model.on('destroy', this.hide, this);
+        this.listenTo(this.model,'change', this.render);
+        this.listenTo(this.model,'destroy', this.hide);
     },
         template: $( "script.playerViewTemplate" ).html(),
 
@@ -23,21 +23,25 @@ var PlayerView = Backbone.View.extend({
     },
     addLevel : function(e){
         this.model.increaseAttribute('level');
+        this.model.updateAttackValue();
         this.model.save();
     },
     removeLevel : function(e){
         this.model.decreaseAttribute('level');
+        this.model.updateAttackValue();
         this.model.save();
     },
     addBonus : function(e){
         this.model.increaseAttribute('bonus');
+        this.model.updateAttackValue();
         this.model.save();
     },
     removeBonus : function(e){
         this.model.decreaseAttribute('bonus');
+        this.model.updateAttackValue();
         this.model.save();
     },
-    remove : function(e){
+    removePlayer : function(e){
         this.trigger('removeClicked');
         this.model.destroy();
     },
