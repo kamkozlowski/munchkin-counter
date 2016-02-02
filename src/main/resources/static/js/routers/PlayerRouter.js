@@ -14,17 +14,22 @@ var PlayerRouter = new (Backbone.Router.extend({
     },
     player: function (id) {
         console.log('player function');
-        this.playerList.fetch();
-        if (id == null) {
-            this.loadView(new PlayerListView({collection: this.playerList}));
-            this.view.render();
-            $('#content').html(this.view.el);
-        }
-        else {
-            this.loadView(new PlayerEditView({model: this.playerList.get(id)}));
-            this.view.render();
-            $('#content').html(this.view.el);
-        }
+        var self = this;
+        this.playerList.fetch({
+            data: { size: 999 }, // Maximum size of page
+            success: function(){
+                if (id == null) {
+                    self.loadView(new PlayerListView({collection: self.playerList}));
+                    self.view.render();
+                    $('#content').html(self.view.el);
+                }
+                else {
+                    self.loadView(new PlayerEditView({model: self.playerList.get(id)}));
+                    self.view.render();
+                    $('#content').html(self.view.el);
+                }
+            }
+        });
     },
     playerGrid : function(page,size){
         if(page==null){
