@@ -15,6 +15,7 @@ buildscript {
 	}
 }
 
+apply plugin: 'war'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -25,8 +26,13 @@ jar {
 	baseName = 'MunchkinCounter'
 	version = '0.1'
 }
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+war{
+	archiveName = 'ROOT.war'
+	destinationDir = file('webapps')
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
 	mavenCentral()
@@ -36,9 +42,11 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('org.hsqldb:hsqldb')
+	//runtime('org.hsqldb:hsqldb')
+	runtime('mysql:mysql-connector-java:5.1.13')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compile("org.springframework.boot:spring-boot-devtools")
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 
 eclipse {
@@ -47,6 +55,8 @@ eclipse {
 		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
 	}
 }
+
+processResources.dependsOn bowerRefresh
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
