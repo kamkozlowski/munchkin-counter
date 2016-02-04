@@ -1,4 +1,5 @@
 # munchkin-counter
+[![Build Status](https://travis-ci.org/kamkozlowski/munchkin-counter.svg?branch=master)](https://travis-ci.org/kamkozlowski/munchkin-counter)
 [![Openshift build](https://img.shields.io/badge/openshift-development%20build-red.svg)](http://dev-munchkincounterw.rhcloud.com)
 
 Helper app that can be used during Munchkin card game for level and bonus counting. Application was built using Spring boot and backbone.
