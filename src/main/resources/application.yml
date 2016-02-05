@@ -37,4 +37,5 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-        dll-auto: create-drop
+    hibernate:
+      dll-auto: create-drop
