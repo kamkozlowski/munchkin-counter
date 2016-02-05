@@ -2,7 +2,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      dll-auto: create-drop
+      ddl-auto: create-drop
   profiles:
     active: dev
 
@@ -38,5 +38,4 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate:
-      dll-auto: update
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
