@@ -1,0 +1,3 @@
+#!/bin/bash
+set -x
+export SPRING_CONFIG_NAME=openshift

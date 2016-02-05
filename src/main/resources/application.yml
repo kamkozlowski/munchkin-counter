@@ -1,0 +1,39 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      dll-auto: create-drop
+  profiles:
+    active: dev
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:hsqldb:file:build/database/local.db
+    username: sa
+    password: sa
+server:
+  port: 8090
+debug: true
+security:
+  basic:
+    enabled: true
+logging:
+  level:
+    org:
+      springframework: INFO
+
+---
+
+spring:
+  profiles: openshift
+  datasource:
+    url: jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}
+    username: ${OPENSHIFT_MYSQL_DB_USERNAME}
+    password: ${OPENSHIFT_MYSQL_DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
