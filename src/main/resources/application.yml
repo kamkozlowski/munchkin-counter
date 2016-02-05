@@ -38,4 +38,5 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate:
-      dll-auto: create-drop
+      dll-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
