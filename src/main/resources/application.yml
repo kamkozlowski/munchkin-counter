@@ -33,6 +33,8 @@ spring:
     url: jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}
     username: ${OPENSHIFT_MYSQL_DB_USERNAME}
     password: ${OPENSHIFT_MYSQL_DB_PASSWORD}
+    testWhileIdle: true
+    validationQuery: SELECT 1
   jpa:
     properties:
       hibernate:
