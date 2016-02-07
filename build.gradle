@@ -11,6 +11,7 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath "gradle.plugin.com.craigburke.gradle:bower-installer-gradle:2.5.1"
+		classpath "com.eriwen:gradle-js-plugin:1.12.1"
 
 	}
 }
@@ -21,6 +22,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: "com.craigburke.bower-installer"
+apply plugin: "com.eriwen.gradle.js"
 
 jar {
 	baseName = 'MunchkinCounter'
@@ -30,6 +32,7 @@ war{
 	archiveName = 'ROOT.war'
 	destinationDir = file('webapps')
 }
+
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -58,21 +61,21 @@ eclipse {
 
 processResources.dependsOn bowerInstall
 
+//requireJs.dependsOn bowerInstall
+//bootRun.dependsOn requireJs
+
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
 }
 
 bower {
 	installBase = 'src/main/resources/static/lib'
-
 	'Backbone.localStorage'('1.1.16'){
 		source 'backbone.localStorage.js' >> '/backbone/plugins/localStorage/'
 	}
-
 	'mustache.js'('2.2.1'){
 		source 'mustache.js' >> '/mustache/'
 	}
-
 	'jquery'('2.2.0') {
 		source 'dist/jquery.js' >> '/jquery/'
 	}
@@ -82,4 +85,15 @@ bower {
 	'bootstrap'('3.3.6') {
 		source 'dist/**' >> '/bootstrap/'
 	}
+	'requirejs'('2.1.22'){
+		source 'require.js' >> '/requirejs/'
+	}
+
+}
+
+requireJs {
+	source = 'src/main/resources/static'
+	dest = file("${buildDir}/resources/main/static/js/main-minimized.js")
+	//include "*.js"
+	requirejs.buildprofile = new File("src/main/resources/static/js/requirejs-config.js")
 }

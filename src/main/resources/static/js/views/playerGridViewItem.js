@@ -1,6 +1,8 @@
+define([ "backbone", "mustache" ], function(Backbone, Mustache) {
+    "use strict";
+
 var PlayerGridViewItem = Backbone.View.extend({
     template: $( "script.playerGridViewItemTemplate" ).html(),
-
 
     render: function(){
         console.log('Rendering player view item');
@@ -10,3 +12,7 @@ var PlayerGridViewItem = Backbone.View.extend({
         return this;
     }
 });
+
+    return PlayerGridViewItem;
+});
+

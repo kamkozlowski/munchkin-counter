@@ -1,3 +1,6 @@
+define([ "backbone", "models/player" ], function(Backbone, Player) {
+    "use strict";
+
 var PlayerList = Backbone.Collection.extend({
 
     //localStorage: new Backbone.LocalStorage("PlayerLocalStore"),
@@ -15,4 +18,6 @@ var PlayerList = Backbone.Collection.extend({
         return response._embedded.players;
     }
 
+});
+    return PlayerList;
 });

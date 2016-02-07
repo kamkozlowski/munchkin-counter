@@ -35,6 +35,7 @@ spring:
     password: ${OPENSHIFT_MYSQL_DB_PASSWORD}
     testWhileIdle: true
     validationQuery: SELECT 1
+
   jpa:
     properties:
       hibernate:

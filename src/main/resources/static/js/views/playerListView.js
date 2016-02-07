@@ -1,3 +1,6 @@
+define([ "backbone", "../views/playerView", "models/player"], function(Backbone, PlayerView, Player){
+    "use strict";
+
 var PlayerListView = Backbone.View.extend({
     events: {
         'click .add-player' : 'addPlayer',
@@ -17,7 +20,7 @@ var PlayerListView = Backbone.View.extend({
     },
     addAll: function(){
         this.playerViews.forEach(function(entry) {
-            console.log("removing views")
+            console.log("removing views");
             entry.remove();
         });
         this.playerViews = [];
@@ -57,4 +60,6 @@ var PlayerListView = Backbone.View.extend({
     }
 
 
+});
+    return PlayerListView;
 });

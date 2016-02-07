@@ -1,3 +1,6 @@
+define([ "backbone", "mustache", "views/playerGridViewItem" ], function(Backbone, Mustache, PlayerGridViewItem) {
+    "use strict";
+
 var PlayerGridView = Backbone.View.extend({
     template: $( "script.playerGridViewTemplate" ).html(),
 
@@ -56,7 +59,7 @@ var PlayerGridView = Backbone.View.extend({
 
     pageSizeChanged: function(event){
         console.log("Page size changed: " + $('#formPageSize').val() );
-        PlayerRouter.navigate('playerTable/0/' + $('#formPageSize').val(), {trigger: true});
+        require("routers/playerRouter").navigate('playerTable/0/' + $('#formPageSize').val(), {trigger: true});
     },
 
     previousPage: function(){
@@ -64,7 +67,7 @@ var PlayerGridView = Backbone.View.extend({
         console.log(this.collection.number);
         var pageNumber = this.collection.number;
         pageNumber--;
-        PlayerRouter.navigate('playerTable/'+pageNumber+'/' + $('#formPageSize').val(), {trigger: true});
+        require("routers/playerRouter").navigate('playerTable/'+pageNumber+'/' + $('#formPageSize').val(), {trigger: true});
 
     },
 
@@ -73,7 +76,7 @@ var PlayerGridView = Backbone.View.extend({
         console.log(this.collection.number);
         var pageNumber = this.collection.number;
         pageNumber++;
-        PlayerRouter.navigate('playerTable/'+pageNumber+'/' + $('#formPageSize').val(), {trigger: true});
+        require("routers/playerRouter").navigate('playerTable/'+pageNumber+'/' + $('#formPageSize').val(), {trigger: true});
     },
 
     close: function(){
@@ -87,4 +90,6 @@ var PlayerGridView = Backbone.View.extend({
         console.log("removing finished");
     }
 
+});
+    return PlayerGridView;
 });
