@@ -2,7 +2,8 @@ require.config({
     shim : {
         "bootstrap" : { "deps" :['jquery'] },
         'backbone':{
-            deps:['jquery'],
+            deps:['jquery', 'underscore' +
+            ''],
             exports:'Backbone'
         }
     },
@@ -10,7 +11,7 @@ require.config({
         "backbone": "../lib/backbone/backbone",
         jquery: "../lib/jquery/jquery",
         bootstrap: "../lib/bootstrap/js/bootstrap",
-        bootstrap: "../lib/underscore/underscore",
+        "underscore": "../lib/underscore/underscore",
         "mustache": "../lib/mustache/mustache",
     }
 });
