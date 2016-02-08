@@ -1,0 +1,38 @@
+<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 player-border">
+    <h2>Player edit</h2>
+    <form>
+        <fieldset class="form-group">
+            <label for="formPlayerName">Name</label>
+            <input type="text" class="form-control" id="formPlayerName" placeholder="Example input" value="{{name}}">
+            <label for="formPlayerSex">Sex</label>
+            <select class="form-control" id="formPlayerSex" >
+                <option  {{#sex}}selected='selected'{{/sex}} >Male</option >
+                <option  {{^sex}}selected='selected'{{/sex}} >Female</option>
+            </select>
+        </fieldset>
+    </form>
+    <p>
+        <b>Level: {{level}}</b>
+    <div class="btn-group">
+        <button class="btn add-level custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        <button class="btn remove-level custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+    </div>
+    </p>
+    <p>
+        <b>Bonus: {{bonus}}</b>
+    <div class="btn-group">
+        <button class="btn add-bonus custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        <button class="btn remove-bonus custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+    </div>
+    </p>
+    <p>
+        <b>Attack: {{attack}}</b>
+    </p>
+    <p>
+    <div class="btn-group">
+        <button class="btn custom-button save-player"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Save</button>
+        <button class="btn custom-button cancel-player"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+        <button class="btn custom-button remove-player"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove</button>
+    </div>
+    </p>
+</div>

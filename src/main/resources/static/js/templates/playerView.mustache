@@ -1,0 +1,29 @@
+ <div class="col-lg-2 col-md-3 col-sm-4 col-xs-11 player-border">
+        <h2>{{name}}</h2>
+        <p>
+        <div class="btn-group">
+            <button class="btn remove-player custom-button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <button class="btn edit-player custom-button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Sex: {{#sex}}Male{{/sex}}{{^sex}}Female{{/sex}}</b>
+        </p>
+        <p>
+            <b>Level: {{level}}</b>
+        <div class="btn-group">
+            <button class="btn add-level custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn remove-level custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Bonus: {{bonus}}</b>
+        <div class="btn-group">
+            <button class="btn add-bonus custom-button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn remove-bonus custom-button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+        </p>
+        <p>
+            <b>Attack: {{attack}}</b>
+        </p>
+    </div>

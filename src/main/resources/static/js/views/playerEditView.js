@@ -1,4 +1,4 @@
-define([ "backbone", "mustache", "../routers/playerRouter", "jquery", "notify" ], function(Backbone, Mustache, PlayerRouter, $) {
+define([ "backbone", "mustache", "../routers/playerRouter", "jquery", "stache!playerEditView" ,"notify" ], function(Backbone, Mustache, PlayerRouter, $, template) {
     "use strict";
 
     var PlayerEditView = Backbone.View.extend({
@@ -11,7 +11,6 @@ define([ "backbone", "mustache", "../routers/playerRouter", "jquery", "notify" ]
             "click .add-bonus": "addBonus",
             "click .remove-bonus": "removeBonus",
         },
-        template: $("script.playerEditTemplate").html(),
 
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -20,7 +19,7 @@ define([ "backbone", "mustache", "../routers/playerRouter", "jquery", "notify" ]
         render: function () {
             console.log('rendering player view item');
             var attributes = this.model.toJSON();
-            this.$el.html(Mustache.to_html(this.template, attributes));
+            this.$el.html(template(attributes));
             console.log('end of rendering player view item');
             return this;
         },

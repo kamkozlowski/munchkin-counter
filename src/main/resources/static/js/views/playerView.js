@@ -1,4 +1,4 @@
-define([ "routers/playerRouter", "backbone", "mustache", "jquery", "notify"], function(PlayerRouter, Backbone, Mustache, $){
+define([ "routers/playerRouter", "backbone", "mustache", "jquery", "stache!playerView", "notify"], function(PlayerRouter, Backbone, Mustache, $, template){
     "use strict";
 
 var PlayerView = Backbone.View.extend({
@@ -16,14 +16,12 @@ var PlayerView = Backbone.View.extend({
         this.listenTo(this.model,'change', this.render);
         this.listenTo(this.model,'destroy', this.hide);
     },
-        template: $( "script.playerViewTemplate" ).html(),
-
 
     render: function(){
         console.log('Rendering player view item');
         var attributes = this.model.toJSON();
         console.log(attributes);
-        this.$el.html(Mustache.to_html(this.template,attributes));
+        this.$el.html(template(attributes));
         console.log('end of rendering player view item');
         return this;
     },

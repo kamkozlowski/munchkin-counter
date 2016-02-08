@@ -1,8 +1,7 @@
-define([ "backbone", "mustache", "views/playerGridViewItem" ], function(Backbone, Mustache, PlayerGridViewItem) {
+define([ "backbone", "mustache", "views/playerGridViewItem", "stache!playerGridView" ], function(Backbone, Mustache, PlayerGridViewItem, template) {
     "use strict";
 
 var PlayerGridView = Backbone.View.extend({
-    template: $( "script.playerGridViewTemplate" ).html(),
 
     initialize: function(){
     },
@@ -29,7 +28,8 @@ var PlayerGridView = Backbone.View.extend({
         if(this.collection.number==0){  // move check to model
             firstPage = true;
         }
-        this.$el.html(Mustache.to_html(this.template,
+        console.log(template);
+        this.$el.html(template(
             {
                 pageSize: this.collection.size,
                 lastPage: lastPage,

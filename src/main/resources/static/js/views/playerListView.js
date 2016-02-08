@@ -1,4 +1,4 @@
-define([ "backbone", "../views/playerView", "models/player"], function(Backbone, PlayerView, Player){
+define([ "backbone", "../views/playerView", "models/player", "stache!playerListView"], function(Backbone, PlayerView, Player, template){
     "use strict";
 
 var PlayerListView = Backbone.View.extend({
@@ -14,7 +14,7 @@ var PlayerListView = Backbone.View.extend({
     render: function() {
         console.log('Render player list');
         this.$el.append("<h1>Dashboard</h1>");
-        var buttonsHtml = $('script.playerListViewTemplate').html();
+        var buttonsHtml = template();
         this.$el.append(buttonsHtml);
         this.addAll();
     },

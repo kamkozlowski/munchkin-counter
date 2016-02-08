@@ -1,0 +1,33 @@
+<h1>Table View</h1>
+<p class="text-left">
+    Total players {{totalElements}}
+</p>
+<div class="col-md-12 text-left">
+    <label for="formPageSize">Page size</label>
+    <select class="form-control" id="formPageSize" >
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+        <option>100</option>
+    </select>
+</div>
+<table class="table table-inverse">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Bonus</th>
+        <th>Attack</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
+</table>
+<div class="col-md-12 text-center">
+    <div class="btn-group">
+        <button class="btn previous-page custom-button" {{#firstPage}}disabled{{/firstPage}} ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+        <button class="btn next-page custom-button" {{#lastPage}}disabled{{/lastPage}} ><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+    </div>
+</div>
