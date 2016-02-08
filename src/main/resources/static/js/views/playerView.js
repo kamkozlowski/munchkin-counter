@@ -1,4 +1,4 @@
-define([ "routers/playerRouter", "backbone", "mustache"], function(PlayerRouter, Backbone, Mustache){
+define([ "routers/playerRouter", "backbone", "mustache", "jquery", "notify"], function(PlayerRouter, Backbone, Mustache, $){
     "use strict";
 
 var PlayerView = Backbone.View.extend({
@@ -30,26 +30,26 @@ var PlayerView = Backbone.View.extend({
     addLevel : function(e){
         this.model.increaseAttribute('level');
         this.model.updateAttackValue();
-        this.model.save();
+        this.model.save({},this.notifyResults());
     },
     removeLevel : function(e){
         this.model.decreaseAttribute('level');
         this.model.updateAttackValue();
-        this.model.save();
+        this.model.save({},this.notifyResults());
     },
     addBonus : function(e){
         this.model.increaseAttribute('bonus');
         this.model.updateAttackValue();
-        this.model.save();
+        this.model.save({},this.notifyResults());
     },
     removeBonus : function(e){
         this.model.decreaseAttribute('bonus');
         this.model.updateAttackValue();
-        this.model.save();
+        this.model.save({},this.notifyResults());
     },
     removePlayer : function(e){
         this.trigger('removeClicked');
-        this.model.destroy();
+        this.model.destroy({},this.notifyResults());
     },
     hide : function(){
         this.$el.remove();
@@ -58,8 +58,28 @@ var PlayerView = Backbone.View.extend({
         console.log('edit player');
         console.log(PlayerRouter);
         require("routers/playerRouter").navigate('player/' + this.model.get('id'), {trigger: true});
-        //exports.getRouter().navigate('player/' + this.model.get('id'), {trigger: true});
-        //PlayerRouter.navigate('player/' + this.model.get('id'), {trigger: true});
+    },
+
+    notifyResults: function(){
+        return {
+            success: function(){
+                $.notify({
+                    message: "Entity updated",
+                    icon: "glyphicon glyphicon-ok"
+                },{
+                    type: "info",
+                });
+            },
+            error: function(model,xhr, options){
+                var errors = JSON.parse(xhr.responseText).errors;
+                $.notify({
+                    message:  "Error: " + errors,
+                    icon: "glyphicon glyphicon-warning-sign"
+                },{
+                    type: "danger",
+                });
+            }
+        };
     }
 });
 

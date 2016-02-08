@@ -37,12 +37,12 @@ var PlayerListView = Backbone.View.extend({
         var player = new Player();
 
         this.collection.add(player);
-        player.save();
+        player.save({},this.notifyResults());
     },
     removePlayers : function(){
         var model;
         while (model = this.collection.first()) {
-            model.destroy();
+            model.destroy(this.notifyResults());
         }
         this.playerViews.forEach(function(entry) {
             console.log("removing views")
@@ -57,6 +57,28 @@ var PlayerListView = Backbone.View.extend({
         });
         this.playerViews = [];
         this.remove();
+    },
+
+    notifyResults: function(){
+        return {
+            success: function(){
+                $.notify({
+                    message: "Entity updated",
+                    icon: "glyphicon glyphicon-ok"
+                },{
+                    type: "info",
+                });
+            },
+            error: function(model,xhr, options){
+                var errors = JSON.parse(xhr.responseText).errors;
+                $.notify({
+                    message:  "Error: " + errors,
+                    icon: "glyphicon glyphicon-warning-sign"
+                },{
+                    type: "danger",
+                });
+            }
+        };
     }
 
 

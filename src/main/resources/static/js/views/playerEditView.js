@@ -1,4 +1,4 @@
-define([ "backbone", "mustache", "../routers/playerRouter" ], function(Backbone, Mustache, PlayerRouter) {
+define([ "backbone", "mustache", "../routers/playerRouter", "jquery", "notify" ], function(Backbone, Mustache, PlayerRouter, $) {
     "use strict";
 
     var PlayerEditView = Backbone.View.extend({
@@ -38,9 +38,8 @@ define([ "backbone", "mustache", "../routers/playerRouter" ], function(Backbone,
                 sex = false;
             }
             this.model.set('sex', sex);
-            this.model.save();
-            console.log(this.model.toJSON());
-            require("routers/playerRouter").navigate('player', {trigger: true});
+            this.model.save({},this.notifyResults());
+
         },
         addLevel: function (e) {
             this.model.increaseAttribute('level');
@@ -66,10 +65,31 @@ define([ "backbone", "mustache", "../routers/playerRouter" ], function(Backbone,
 
         removePlayer: function () {
             console.log('Remove button');
-            this.model.destroy();
-            require("routers/playerRouter").navigate('player', {trigger: true});
-        }
+            this.model.destroy(this.notifyResults());
+        },
 
+        notifyResults: function(){
+            return {
+                success: function(){
+                    $.notify({
+                        message: "Entity updated",
+                        icon: "glyphicon glyphicon-ok"
+                    },{
+                        type: "info",
+                    });
+                    require("routers/playerRouter").navigate('player', {trigger: true});
+                },
+                error: function(model,xhr, options){
+                    var errors = JSON.parse(xhr.responseText).errors;
+                    $.notify({
+                        message:  "Error: " + errors,
+                        icon: "glyphicon glyphicon-warning-sign"
+                    },{
+                        type: "danger",
+                    });
+                }
+            };
+        }
 
     });
 

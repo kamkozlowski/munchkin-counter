@@ -59,6 +59,21 @@ body{
     color: hsl(40, 56%, 16%);
 }
 
+/* Info notify */
+.alert-info {
+    color: #299b17;
+    background-color: #8af794;
+    border-color: #79f16d;
+}
+
+/* Error notify */
+.alert-danger {
+    color: #9b2830;
+    background-color: #f1998b;
+    border-color: #f17054;
+}
+
+
 /* Nav-toggle */
 .navbar-inverse .navbar-toggle .icon-bar {
     background-color: hsl(18, 65%, 21%);
